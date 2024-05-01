@@ -53,7 +53,7 @@ function draw() {
     
   
   
-  
+  // 
   // if(player.overlaps(border1){
   //    player.speed = 0;
   //    }
