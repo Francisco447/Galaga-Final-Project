@@ -6,6 +6,8 @@ let borderRight;
 
 let score = 0;
 
+let bullets = [];
+
 function setup() {
   
   new Canvas(500, 500);
@@ -14,11 +16,23 @@ function setup() {
   
   borderRight = new Sprite(500,450, 0, 20, 'static');
   
-  player = new Sprite();
+  player = new Sprite(255,450, 75, 30, 'static');
+
+  bullets = new Sprite();
+
+  bullets.color = 'red';
+
+  bullets.y = 450;
+
+  bullets.x = 255;
+
+  bullets.diameter = 15;
   
-  player.x = 255;
+  // player.x = 255;
   
-  player.y = 450;
+  // player.y = 450;
+
+  player.overlaps(bullets);
   
 }
 
@@ -50,13 +64,12 @@ function draw() {
     player.speed = 0;
   }
       
-    
+  if (kb.presses('space')){
   
-  
-  // 
-  // if(player.overlaps(border1){
-  //    player.speed = 0;
-  //    }
+  bullets.direction = 250;
+
+  bullets.speed = 2; 
+  }
   
   
   
