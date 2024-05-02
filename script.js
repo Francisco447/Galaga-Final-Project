@@ -16,7 +16,7 @@ function setup() {
   
   borderRight = new Sprite(500,450, 0, 20, 'static');
   
-  player = new Sprite(255,450, 75, 30, 'static');
+  player = new Sprite(255,450, 75, 30, '');
 
   bullets = new Sprite();
 
@@ -56,12 +56,6 @@ function draw() {
   } else {
     player.speed = 0;
     
-  }
-  if (player.collides(borderLeft)){
-    player.speed = 0;
-  }
-  if (player.collides(borderRight)){
-    player.speed = 0;
   }
       
   if (kb.presses('space')){
