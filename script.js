@@ -6,7 +6,7 @@ let borderRight;
 
 let score = 0;
 
-let bullets = [];
+let bullets;
 
 function setup() {
   
@@ -18,7 +18,7 @@ function setup() {
   
   player = new Sprite(255,450, 75, 30, '');
 
-  bullets = new Sprite();
+  bullets = new Group();
 
   bullets.color = 'red';
 
@@ -32,8 +32,10 @@ function setup() {
   
   // player.y = 450;
 
-  player.overlaps(bullets);
-  
+  // player.overlaps(bullets);
+ 
+  bullets.layer = -1;
+
 }
 
 function draw() {
@@ -59,8 +61,11 @@ function draw() {
   }
       
   if (kb.presses('space')){
+  let firedBullets = new Sprite(bullets);
+  firedBullets = 
   
-  bullets.direction = 250;
+
+  bullets.direction = 270;
 
   bullets.speed = 2; 
   }
