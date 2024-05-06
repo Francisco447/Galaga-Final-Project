@@ -6,24 +6,47 @@ let borderRight;
 
 let score = 0;
 
+let bullets;
+
+let enemies;
+
+
 function setup() {
   
   new Canvas(500, 500);
   
-  borderLeft = new Sprite(0,450, 0, 20, 'static');
+  borderLeft = new Sprite(0,450, 0, 200, 'static');
   
-  borderRight = new Sprite(500,450, 0, 20, 'static');
+  borderRight = new Sprite(500,450, 0, 200, 'static');
   
-  player = new Sprite();
+  player = new Sprite(255,450, 45, 20, '')
   
-  player.x = 255;
+  bullets = new Group();
   
-  player.y = 450;
+  enemies = new Group();
+  
+  bullets.color = 'teal ';
+
+  bullets.diameter = 15;
+ 
+  bullets.layer = -1;
+  
+  player.overlaps(bullets);
+  
+  enemies.x = 200;
+  
+  enemies.y = 200;
+  
+  enemies.diameter = 20;
+  
+  // enemies.y -= 5;
+  
+  enemies.color = 'red';
   
 }
 
 function draw() {
-    background('black');
+    background('white');
      
     textSize(25);
   
@@ -43,23 +66,40 @@ function draw() {
     player.speed = 0;
     
   }
-  if (player.collides(borderLeft)){
-    player.speed = 0;
-  }
-  if (player.collides(borderRight)){
-    player.speed = 0;
-  }
       
+  if (kb.presses('space')){
     
+  let firedBullet = new bullets.Sprite(player.x,player.y);
+  
+  firedBullet.direction = 270;
+ 
+  firedBullet.speed = 20; 
+    
+  // bullets.life = 5;
+  }
+  
+  if (kb.presses('space')){
+  let newEnemy = new enemies.Sprite()
+    newEnemy.x = random(0,500)
+    newEnemy.y = 0
+    newEnemy.direction = -270;
+    newEnemy.speed = 2;
+    
+  }
+  
+ 
   
   
-  // 
-  // if(player.overlaps(border1){
-  //    player.speed = 0;
-  //    }
   
   
   
+  
+  
+  // if (enemies.overlaps(player)){
+  //   gameOver()
+  // }
 }
+
+
 
     
