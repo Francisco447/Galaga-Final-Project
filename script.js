@@ -33,6 +33,10 @@ function setup() {
   
   player.overlaps(bullets);
   
+  enemies.overlaps(player, endGame);
+  
+  bullets.overlaps(enemies, scorePoint);
+  
   enemies.x = 200;
   
   enemies.y = 200;
@@ -46,7 +50,7 @@ function setup() {
 }
 
 function draw() {
-    background('white');
+    background('black');
      
     textSize(25);
   
@@ -80,25 +84,48 @@ function draw() {
   
   if (kb.presses('space')){
   let newEnemy = new enemies.Sprite()
-    newEnemy.x = random(0,500)
+  
+    newEnemy.x = random(15,485)
+    
     newEnemy.y = 0
+    
     newEnemy.direction = -270;
+    
     newEnemy.speed = 2;
+  
     
   }
   
  
   
   
-  
-  
-  
-  
-  
-  // if (enemies.overlaps(player)){
-  //   gameOver()
-  // }
 }
+
+function endGame(){
+  noLoop();
+}
+
+function scorePoint(bullets, enemies){
+  score++
+  enemies.remove();
+  bullets.remove();
+}
+
+
+function mousePressed(){
+  
+//   if (isLooping(false, mousePressed)){
+    
+//   }
+  
+  enemies.removeAll();
+  bullets.removeAll();
+  loop();
+  score = 0;
+  player.x = 255;
+  player.y = 450;
+}
+
 
 
 
