@@ -1,3 +1,19 @@
+// The tool I used was P5Play to create a similar game to Galaga. I used variables to initialize
+// the player, borders, enemies, bullets, and the score. I used several 'if' statements 
+// throughout my project to execute actions, such as the character movement and the score counter. 
+// There were a also couple of intermeditate concepts that I used while
+// using P5Play, including sprites and groups which are similar to arrays.
+// Groups were important in my project since they work similar to arrays and made it pretty 
+// easy to create several instances of an object. The group is created in the setup and the way I made 
+// my project, I had it created so everytime the space button is pressed a new sprite/object 
+// within that group is created. Similar to popping an element in or out of an array, I made it so 
+// whenever a bullet touches an enemy it deletes those intances/object of that group
+// or when a new enemy sprite touches the bottom border it is deleted and the score subtracts 2. 
+// Sprites are reffered to as "ghosts", which are used to create objects, in my example
+// the player and the borders. A sprites appearance can be updated in several different
+// way including, just changing its color, to being able to change its image and add 
+// animation to the sprite. 
+
 let player;
 
 let borderLeft;
