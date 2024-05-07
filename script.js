@@ -57,6 +57,8 @@ function draw() {
   
     text('Score: '+ score,10,30);
   
+  // player movement and speed 
+
     player.speed = 15;
   
   if (kb.pressing('left')){
@@ -72,10 +74,10 @@ function draw() {
     
   } 
   
-      
+  // bullet shooting and enemy spawning
   if (kb.presses('space')){
     
-  let firedBullet = new     bullets.Sprite(player.x,player.y);
+  let firedBullet = new bullets.Sprite(player.x,player.y);
   
   firedBullet.direction = 270;
  
@@ -96,20 +98,22 @@ function draw() {
     newEnemy.speed = 2;
     
   }
-  
+  // win game after reaching 15 points
   if (score >= 15){
     gameWin();
   }
   
 }
 
-
+// if an enemy hits the player, end the game/loop
 function endGame(){
   text('Click to Restart', 170,160);
 
   noLoop();
   
 }
+
+// make it so if an enemy is hit the enemy and bullet is removed and scores 1 point
 
 function scorePoint(bullets, enemies){
   
@@ -121,10 +125,14 @@ function scorePoint(bullets, enemies){
   
 }
 
+// if the player misses an enemy it subtracts 2 points
+
 function losePoint(enemies){
   score -= 2
   enemies.remove();
 }
+
+// restart the game
 
 function mousePressed(){
   
@@ -141,6 +149,8 @@ function mousePressed(){
   player.y = 450;
   
 }
+
+// add win text for winning the game after 15 points
 
 function gameWin(){
   text('\t\t\t\t\tYou Win! \n Double Click to restart', 130, 160);
