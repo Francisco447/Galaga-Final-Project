@@ -14,6 +14,8 @@
 // way including, just changing its color, to being able to change its image and add 
 // animation to the sprite. 
 
+// created/initialized variables 
+
 let player;
 
 let borderLeft;
@@ -32,6 +34,11 @@ function setup() {
   
   new Canvas(500, 500);
   
+  // created my border and character sprites with (x,y, width, height, 'collider')
+  // static makes it so the sprite cannot be moved by other sprites. The player and 
+  // bottom border do not have collider values set since the player moves so it cannot
+  // stay static, and any enemy that touches the bottom border is removed.
+
   borderLeft = new Sprite(0,450, 0, 200, 'static');
   
   borderRight = new Sprite(500,450, 0, 200, 'static');
@@ -40,6 +47,8 @@ function setup() {
   
   player = new Sprite(255,450, 45, 20, '')
   
+  // created my groups which will be used to create multiple sprites of bullets and enemies.
+
   bullets = new Group();
   
   enemies = new Group();
@@ -48,14 +57,23 @@ function setup() {
 
   bullets.diameter = 15;
  
+  // set the layer to -1 for the bullets so the bullets are drawn 
+  // before the player sprite which makes the design look better. 
+
   bullets.layer = -1;
-  
+
   player.overlaps(bullets);
   
+  // if enemy overlaps the player, call the endGame function
+
   enemies.overlaps(player, endGame);
   
+  // if the enemy overlaps the border at the bottom the player loses two points
+
   enemies.overlaps(borderBottom, losePoint);
   
+  // if the bullet overlaps/touches the enemy the player earns a point
+
   bullets.overlaps(enemies, scorePoint);
   
   enemies.diameter = 20;
@@ -90,7 +108,7 @@ function draw() {
     
   } 
   
-  // bullet shooting and enemy spawning
+  // bullet are spawned at the players x and y and move upwards
   if (kb.presses('space')){
     
   let firedBullet = new bullets.Sprite(player.x,player.y);
@@ -101,6 +119,9 @@ function draw() {
     
   }
   
+  // enemies are spawned at a random x 15-485(to avoid the side barriers and make the shooting easier),
+ //  and move downwards
+
   if (kb.presses('space')){
     
   let newEnemy = new enemies.Sprite()
@@ -114,7 +135,7 @@ function draw() {
     newEnemy.speed = 2;
     
   }
-  // win game after reaching 15 points
+  // win game after reaching 15 points, calling the gameWin function
   if (score >= 15){
     gameWin();
   }
@@ -129,7 +150,7 @@ function endGame(){
   
 }
 
-// make it so if an enemy is hit the enemy and bullet is removed and scores 1 point
+// make it so if an enemy is hit, the enemy and bullet are removed and scores 1 point
 
 function scorePoint(bullets, enemies){
   
@@ -141,14 +162,17 @@ function scorePoint(bullets, enemies){
   
 }
 
-// if the player misses an enemy it subtracts 2 points
+// if the player misses an enemy and it hits the bottom border it subtracts 2 points
 
 function losePoint(enemies){
+
   score -= 2
+
   enemies.remove();
 }
 
-// restart the game
+// restart the game/loop when the mouse is pressed, removing the entire bullet/enemies groups,
+// resets the score, and resets the player to original location
 
 function mousePressed(){
   
@@ -166,10 +190,13 @@ function mousePressed(){
   
 }
 
-// add win text for winning the game after 15 points
+// add win text for winning/ending the game after reaching 15 points
+// (\t) tab and (\n) new line for text to fit correctly
 
 function gameWin(){
+
   text('\t\t\t\t\tYou Win! \n Double Click to restart', 130, 160);
+
   noLoop();
   
 }
